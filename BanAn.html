@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伴安BanAn - 专业陪诊服务平台</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4DB6AC;
+            --primary-light: #82E9DE;
+            --primary-dark: #00867D;
+            --secondary: #FFB74D;
+            --secondary-light: #FFE97D;
+            --secondary-dark: #C88719;
+            --light: #f8f9fa;
+            --dark: #37474F;
+            --success: #81C784;
+            --warm-light: #FFF9F5;
+            --warm-bg: #FFF5F0;
+            --soft-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            --soft-radius: 16px;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.7;
+            color: #5D5D5D;
+            background-color: var(--warm-bg);
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            padding: 12px 0;
+        }
+        
+        .navbar.scrolled {
+            padding: 8px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-right: 8px;
+            font-size: 1.8rem;
+        }
+        
+        .navbar-brand span {
+            color: var(--secondary);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 120px 0 100px;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2300867D' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border: none;
+            padding: 14px 32px;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(77, 182, 172, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(77, 182, 172, 0.5);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            border: none;
+            padding: 14px 32px;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 183, 77, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 183, 77, 0.5);
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--secondary) 100%);
+        }
+        
+        .btn-light {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 14px 32px;
+            font-weight: 600;
+            border-radius: 50px;
+            color: var(--primary-dark);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-light:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.4);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-align: center;
+            font-size: 2.2rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .feature-card {
+            border-radius: var(--soft-radius);
+            transition: transform 0.4s, box-shadow 0.4s;
+            height: 100%;
+            border: none;
+            box-shadow: var(--soft-shadow);
+            background-color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(77, 182, 172, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            padding: 15px;
+            border-radius: 50%;
+            background-color: rgba(77, 182, 172, 0.1);
+        }
+        
+        .companion-card {
+            border-radius: var(--soft-radius);
+            overflow: hidden;
+            transition: transform 0.4s;
+            box-shadow: var(--soft-shadow);
+            height: 100%;
+            background-color: white;
+            position: relative;
+        }
+        
+        .companion-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(77, 182, 172, 0.15);
+        }
+        
+        .companion-img {
+            height: 220px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .companion-img::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+        }
+        
+        .badge-custom {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-weight: 500;
+        }
+        
+        .form-section {
+            background-color: white;
+            border-radius: var(--soft-radius);
+            padding: 3rem;
+            box-shadow: var(--soft-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #263238 100%);
+            color: white;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(77, 182, 172, 0.4);
+        }
+        
+        .testimonial-card {
+            border-left: 5px solid var(--primary);
+            padding-left: 2rem;
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--soft-radius);
+            box-shadow: var(--soft-shadow);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 4rem;
+            color: var(--primary-light);
+            font-family: Georgia, serif;
+            line-height: 1;
+            opacity: 0.3;
+        }
+        
+        .bg-light-custom {
+            background: linear-gradient(135deg, #F5FDFC 0%, #F0F9F8 100%) !important;
+        }
+        
+        .warm-bg {
+            background: linear-gradient(135deg, var(--warm-light) 0%, var(--warm-bg) 100%);
+        }
+        
+        .nav-link {
+            color: #666;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+            margin: 0 8px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .founder-badge {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            color: white;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+        
+        .companion-intro {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .university-badge {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 15px;
+        }
+        
+        .alert-custom {
+            background-color: #e8f4f8;
+            border-left: 5px solid var(--primary);
+            border-radius: 10px;
+        }
+        
+        .admin-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .admin-modal .modal-content {
+            border-radius: var(--soft-radius);
+            overflow: hidden;
+        }
+        
+        .admin-modal .modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+        
+        .data-item {
+            border-left: 5px solid var(--primary);
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .data-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, 15px) rotate(5deg); }
+            50% { transform: translate(-5px, 20px) rotate(-5deg); }
+            75% { transform: translate(-10px, 5px) rotate(3deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 80px 0 60px;
+                text-align: center;
+            }
+            
+            .form-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .spinner-border {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+        
+        .form-success {
+            display: none;
+            background: linear-gradient(135deg, #d4edda, #c8e6c9);
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            border-left: 5px solid #81C784;
+        }
+        
+        .heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite both;
+        }
+        
+        @keyframes heartbeat {
+            from {
+                transform: scale(1);
+                transform-origin: center center;
+                animation-timing-function: ease-out;
+            }
+            10% {
+                transform: scale(0.91);
+                animation-timing-function: ease-in;
+            }
+            17% {
+                transform: scale(0.98);
+                animation-timing-function: ease-out;
+            }
+            33% {
+                transform: scale(0.87);
+                animation-timing-function: ease-in;
+            }
+            45% {
+                transform: scale(1);
+                animation-timing-function: ease-out;
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-hands-helping heartbeat"></i>伴安<span>BanAn</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">服务介绍</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#companions">陪诊师</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#process">服务流程</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary ms-2" href="#order">立即下单</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-secondary ms-2" href="#apply">成为陪诊师</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero-section" id="home">
+        <div class="floating-elements">
+            <div class="floating-element" style="width: 80px; height: 80px; top: 10%; left: 5%;"></div>
+            <div class="floating-element" style="width: 60px; height: 60px; top: 20%; left: 80%;"></div>
+            <div class="floating-element" style="width: 100px; height: 100px; top: 60%; left: 10%;"></div>
+            <div class="floating-element" style="width: 70px; height: 70px; top: 70%; left: 85%;"></div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center hero-content">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">专业陪诊，温暖相伴</h1>
+                    <p class="lead mb-4">伴安为您提供专业可靠的陪诊服务，让看病不再孤单。我们的陪诊师全程陪伴，协助挂号、缴费、取药，为您省时省力。</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#order" class="btn btn-light btn-lg">立即下单</a>
+                        <a href="#apply" class="btn btn-outline-light btn-lg">成为陪诊师</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://cdn.pixabay.com/photo/2017/05/25/21/32/nurse-2344670_1280.png" alt="陪诊服务" class="img-fluid" style="max-height: 400px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务特色 -->
+    <section class="py-5" id="services">
+        <div class="container">
+            <h2 class="section-title fade-in">为什么选择伴安</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h4>专业陪诊师</h4>
+                        <p class="text-muted">所有陪诊师经过严格筛选和专业培训，熟悉医院流程，能够提供贴心周到的服务。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h4>快速响应</h4>
+                        <p class="text-muted">下单后15分钟内匹配陪诊员，节省您宝贵的时间，让就诊更加高效便捷。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>安全保障</h4>
+                        <p class="text-muted">全程服务保险保障，个人信息严格加密，确保您的隐私和安全无虞。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 陪诊师展示 -->
+    <section class="py-5 warm-bg" id="companions">
+        <div class="container">
+            <h2 class="section-title fade-in">我们的创始陪诊师</h2>
+            <p class="text-center text-muted mb-5 fade-in">伴安由两位四川外国语大学的热心学生创立，她们亲自提供陪诊服务，确保每一位用户都能获得最贴心的体验</p>
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-4">
+                    <div class="card companion-card fade-in">
+                        <div class="companion-img">
+                            <i class="fas fa-user fa-5x"></i>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">刘钰杰</h5>
+                                <span class="badge founder-badge">创始人</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="badge university-badge">四川外国语大学</span>
+                            </div>
+                            <p class="card-text text-muted">汉语国际教育专业大二学生</p>
+                            <div class="companion-intro">
+                                <p>钰杰性格细心负责，有很强的同理心。她曾在医院做过志愿者，熟悉医院环境和就诊流程。善于与老年人沟通，能够耐心解答各种问题。</p>
+                                <p>她希望通过自己的语言优势和温暖陪伴，帮助那些在医院感到迷茫和无助的人，特别是为外国友人提供双语陪诊服务。</p>
+                            </div>
+                            <div class="mb-2">
+                                <span class="badge badge-custom me-1">耐心细致</span>
+                                <span class="badge badge-custom me-1">双语服务</span>
+                                <span class="badge badge-custom">沟通能力强</span>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 mb-4">
+                    <div class="card companion-card fade-in">
+                        <div class="companion-img">
+                            <i class="fas fa-user fa-5x"></i>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">杨雨欣</h5>
+                                <span class="badge founder-badge">创始人</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="badge university-badge">四川外国语大学</span>
+                            </div>
+                            <p class="card-text text-muted">汉语国际教育专业大二学生</p>
+                            <div class="companion-intro">
+                                <p>雨欣性格开朗热情，有丰富的志愿者经验。她曾在多个公益项目中服务，特别擅长与人沟通和安抚紧张情绪。</p>
+                                <p>她相信温暖的陪伴和专业的帮助可以减轻患者在医院的不安，让就医过程变得更加舒心。同时，她也能为有需要的用户提供基础的英语沟通支持。</p>
+                            </div>
+                            <div class="mb-2">
+                                <span class="badge badge-custom me-1">热情开朗</span>
+                                <span class="badge badge-custom me-1">英语沟通</span>
+                                <span class="badge badge-custom">善解人意</span>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star-half-alt text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4 fade-in">
+                <p class="text-muted">我们正在招募更多有爱心、有责任感的大学生陪诊师</p>
+                <a href="#apply" class="btn btn-outline-primary">加入我们</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务流程 -->
+    <section class="py-5 bg-light-custom" id="process">
+        <div class="container">
+            <h2 class="section-title text-center fade-in">简单四步，轻松陪诊</h2>
+            <div class="row g-4 mt-4">
+                <div class="col-md-3 text-center fade-in">
+                    <div class="step-number">1</div>
+                    <h5>提交需求</h5>
+                    <p class="text-muted">填写基本信息和服务需求</p>
+                </div>
+                <div class="col-md-3 text-center fade-in">
+                    <div class="step-number">2</div>
+                    <h5>匹配陪诊师</h5>
+                    <p class="text-muted">系统智能匹配最适合的陪诊师</p>
+                </div>
+                <div class="col-md-3 text-center fade-in">
+                    <div class="step-number">3</div>
+                    <h5>确认服务</h5>
+                    <p class="text-muted">确认陪诊师信息和服务细节</p>
+                </div>
+                <div class="col-md-3 text-center fade-in">
+                    <div class="step-number">4</div>
+                    <h5>享受服务</h5>
+                    <p class="text-muted">陪诊师准时到达，全程陪同</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 用户评价 -->
+    <section class="py-5 warm-bg" id="testimonials">
+        <div class="container">
+            <h2 class="section-title text-center fade-in">用户评价</h2>
+            <div class="row g-4 mt-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card fade-in">
+                        <p>"刘钰杰同学非常专业，帮我处理了所有挂号缴费的流程，让我可以专心看病，真的太感谢了！"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-user-circle fa-2x text-muted"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">李先生</h6>
+                                <small class="text-muted">65岁，膝关节置换术后复查</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card fade-in">
+                        <p>"杨雨欣同学特别细心，知道我紧张就一直陪着我聊天，整个就诊过程都很愉快。"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-user-circle fa-2x text-muted"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">王阿姨</h6>
+                                <small class="text-muted">58岁，糖尿病复查</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card fade-in">
+                        <p>"两位创始人都很有责任心，我母亲手术后需要定期复查，每次都找她们陪同，非常放心。"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-user-circle fa-2x text-muted"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">张女士</h6>
+                                <small class="text-muted">42岁，为母亲订购陪诊服务</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下单表单 -->
+    <section class="py-5 bg-light-custom" id="order">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="form-section fade-in">
+                        <h2 class="section-title text-center mb-4">立即预约陪诊服务</h2>
+                        <form id="orderForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">您的姓名 *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">联系电话 *</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="hospital" class="form-label">就诊医院 *</label>
+                                    <input type="text" class="form-control" id="hospital" name="hospital" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="date" class="form-label">预约日期 *</label>
+                                    <input type="date" class="form-control" id="date" name="date" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="time" class="form-label">大致时间 *</label>
+                                    <select class="form-select" id="time" name="time" required>
+                                        <option value="">请选择</option>
+                                        <option value="morning">上午 (8:00-12:00)</option>
+                                        <option value="afternoon">下午 (12:00-17:00)</option>
+                                        <option value="full">全天</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="condition" class="form-label">病情简述</label>
+                                    <textarea class="form-control" id="condition" name="condition" rows="3" placeholder="请简要描述您的情况和需求"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="agree" required>
+                                        <label class="form-check-label" for="agree">
+                                            我已阅读并同意<a href="#" class="text-primary">《服务协议》</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">提交预约</button>
+                                    <div class="loading" id="orderLoading">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">提交中...</span>
+                                        </div>
+                                        <span class="ms-2">提交中，请稍候...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-success" id="orderSuccess">
+                                <i class="fas fa-check-circle me-2"></i>您的预约已提交成功！我们会尽快联系您确认详情。
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 陪诊师申请 -->
+    <section class="py-5 warm-bg" id="apply">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title fade-in">成为伴安陪诊师</h2>
+                    <p class="lead fade-in">加入我们，利用您的专业知识和服务精神，为需要帮助的人提供温暖陪伴。</p>
+                    <ul class="list-unstyled fade-in">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>灵活的工作时间</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>有竞争力的收入</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>专业的培训支持</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>持续的职业发展</li>
+                    </ul>
+                    <a href="#applyForm" class="btn btn-secondary btn-lg mt-3 fade-in">立即申请</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-section mt-4 mt-lg-0 fade-in">
+                        <h3 class="h4 mb-4">陪诊师申请表</h3>
+                        <form id="applyForm">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="applyName" class="form-label">姓名 *</label>
+                                    <input type="text" class="form-control" id="applyName" name="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="applyPhone" class="form-label">联系电话 *</label>
+                                    <input type="tel" class="form-control" id="applyPhone" name="phone" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="applyAge" class="form-label">年龄 *</label>
+                                    <input type="number" class="form-control" id="applyAge" name="age" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="applyEdu" class="form-label">教育背景 *</label>
+                                    <input type="text" class="form-control" id="applyEdu" name="education" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="applyExp" class="form-label">相关经验</label>
+                                    <textarea class="form-control" id="applyExp" name="experience" rows="3" placeholder="请描述您的医疗、护理或相关服务经验"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label for="applyReason" class="form-label">申请理由</label>
+                                    <textarea class="form-control" id="applyReason" name="reason" rows="3" placeholder="请说明您为什么想成为陪诊师"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="applyAgree" required>
+                                        <label class="form-check-label" for="applyAgree">
+                                            我确认所填信息真实有效
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-secondary w-100">提交申请</button>
+                                    <div class="loading" id="applyLoading">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">提交中...</span>
+                                        </div>
+                                        <span class="ms-2">提交中，请稍候...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-success" id="applySuccess">
+                                <i class="fas fa-check-circle me-2"></i>您的申请已提交成功！我们会在3个工作日内审核并与您联系。
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">伴安 BanAn</h5>
+                    <p class="text-light">专业陪诊服务平台，为您提供温暖可靠的就医陪伴服务。</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-light"><i class="fab fa-weixin fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-weibo fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fas fa-phone fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">快速链接</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-light text-decoration-none">首页</a></li>
+                        <li><a href="#services" class="text-light text-decoration-none">服务介绍</a></li>
+                        <li><a href="#companions" class="text-light text-decoration-none">陪诊师</a></li>
+                        <li><a href="#process" class="text-light text-decoration-none">服务流程</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">联系我们</h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> 13594016569</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> 2104327062@qq.com</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> 重庆市沙坪坝区四川外国语大学</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="text-white mb-3">微信公众号</h5>
+                    <div class="bg-light rounded p-2 d-inline-block">
+                        <div class="bg-white p-3 text-center">
+                            <i class="fas fa-qrcode fa-3x text-muted"></i>
+                            <p class="small text-muted mt-2 mb-0">扫码关注我们</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-light mb-0">© 2025 伴安 BanAn. 保留所有权利.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-light text-decoration-none me-3">隐私政策</a>
+                    <a href="#" class="text-light text-decoration-none">服务条款</a>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <div class="alert alert-custom">
+                        <small>目前我们处于试运营阶段，所有订单将由创始人亲自服务并提供最贴心的体验</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 管理面板入口 -->
+    <div class="admin-panel">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#adminModal">
+            <i class="fas fa-cog"></i> 管理后台
+        </button>
+    </div>
+
+    <!-- 管理后台模态框 -->
+    <div class="modal fade admin-modal" id="adminModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">伴安平台管理后台</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="adminTabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#serviceOrders">服务预约</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#companionApplications">陪诊师申请</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content mt-3">
+                        <div class="tab-pane fade show active" id="serviceOrders">
+                            <div id="serviceOrdersList"></div>
+                        </div>
+                        <div class="tab-pane fade" id="companionApplications">
+                            <div id="companionApplicationsList"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="exportData">导出数据</button>
+                    <button type="button" class="btn btn-danger" id="clearAllData">清空所有数据</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 表单提交处理
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('orderLoading').style.display = 'block';
+            
+            const formData = new FormData(this);
+            const data = {
+                type: '预约服务',
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                hospital: formData.get('hospital'),
+                date: formData.get('date'),
+                time: formData.get('time'),
+                condition: formData.get('condition')
+            };
+            
+            setTimeout(() => {
+                document.getElementById('orderLoading').style.display = 'none';
+                document.getElementById('orderSuccess').style.display = 'block';
+                this.reset();
+                saveFormData(data);
+                
+                setTimeout(() => {
+                    document.getElementById('orderSuccess').style.display = 'none';
+                }, 5000);
+            }, 1500);
+        });
+        
+        document.getElementById('applyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('applyLoading').style.display = 'block';
+            
+            const formData = new FormData(this);
+            const data = {
+                type: '陪诊师申请',
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                age: formData.get('age'),
+                education: formData.get('education'),
+                experience: formData.get('experience'),
+                reason: formData.get('reason')
+            };
+            
+            setTimeout(() => {
+                document.getElementById('applyLoading').style.display = 'none';
+                document.getElementById('applySuccess').style.display = 'block';
+                this.reset();
+                saveFormData(data);
+                
+                setTimeout(() => {
+                    document.getElementById('applySuccess').style.display = 'none';
+                }, 5000);
+            }, 1500);
+        });
+        
+        // 保存表单数据到本地存储
+        function saveFormData(data) {
+            let storedData = JSON.parse(localStorage.getItem('bananFormData') || '[]');
+            storedData.push({
+                ...data,
+                timestamp: new Date().toLocaleString('zh-CN')
+            });
+            localStorage.setItem('bananFormData', JSON.stringify(storedData));
+            
+            // 刷新管理后台显示
+            loadAdminData();
+        }
+        
+        // 加载管理后台数据
+        function loadAdminData() {
+            const storedData = JSON.parse(localStorage.getItem('bananFormData') || '[]');
+            
+            // 分离服务预约和陪诊师申请
+            const serviceOrders = storedData.filter(item => item.type === '预约服务');
+            const companionApplications = storedData.filter(item => item.type === '陪诊师申请');
+            
+            // 显示服务预约
+            let serviceOrdersHTML = '';
+            if (serviceOrders.length === 0) {
+                serviceOrdersHTML = '<p class="text-muted">暂无服务预约数据</p>';
+            } else {
+                serviceOrders.forEach((order, index) => {
+                    serviceOrdersHTML += `
+                        <div class="data-item">
+                            <h6>预约 #${index + 1}</h6>
+                            <p><strong>姓名:</strong> ${order.name}</p>
+                            <p><strong>电话:</strong> ${order.phone}</p>
+                            <p><strong>医院:</strong> ${order.hospital}</p>
+                            <p><strong>日期:</strong> ${order.date}</p>
+                            <p><strong>时间:</strong> ${order.time}</p>
+                            <p><strong>病情:</strong> ${order.condition || '未填写'}</p>
+                            <p><strong>提交时间:</strong> ${order.timestamp}</p>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('serviceOrdersList').innerHTML = serviceOrdersHTML;
+            
+            // 显示陪诊师申请
+            let companionApplicationsHTML = '';
+            if (companionApplications.length === 0) {
+                companionApplicationsHTML = '<p class="text-muted">暂无陪诊师申请数据</p>';
+            } else {
+                companionApplications.forEach((application, index) => {
+                    companionApplicationsHTML += `
+                        <div class="data-item">
+                            <h6>申请 #${index + 1}</h6>
+                            <p><strong>姓名:</strong> ${application.name}</p>
+                            <p><strong>电话:</strong> ${application.phone}</p>
+                            <p><strong>年龄:</strong> ${application.age}</p>
+                            <p><strong>教育背景:</strong> ${application.education}</p>
+                            <p><strong>相关经验:</strong> ${application.experience || '未填写'}</p>
+                            <p><strong>申请理由:</strong> ${application.reason || '未填写'}</p>
+                            <p><strong>提交时间:</strong> ${application.timestamp}</p>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('companionApplicationsList').innerHTML = companionApplicationsHTML;
+        }
+        
+        // 导出数据功能
+        document.getElementById('exportData').addEventListener('click', function() {
+            const storedData = JSON.parse(localStorage.getItem('bananFormData') || '[]');
+            if (storedData.length === 0) {
+                alert('没有数据可导出');
+                return;
+            }
+            
+            const dataStr = JSON.stringify(storedData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `banan_data_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+        });
+        
+        // 清空所有数据
+        document.getElementById('clearAllData').addEventListener('click', function() {
+            if (confirm('确定要清空所有数据吗？此操作不可恢复！')) {
+                localStorage.removeItem('bananFormData');
+                loadAdminData();
+                alert('所有数据已清空');
+            }
+        });
+        
+        // 页面加载时初始化管理后台数据
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAdminData();
+            
+            // 淡入动画
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
